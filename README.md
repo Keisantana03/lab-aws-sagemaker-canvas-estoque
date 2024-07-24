@@ -1,47 +1,35 @@
-# 📊 Previsão de Estoque Inteligente na AWS com [SageMaker Canvas](https://aws.amazon.com/pt/sagemaker/canvas/)
+# Desafio de projeto "Previsão de Estoque Inteligente na AWS com SageMaker Canvas"
 
-Bem-vindo ao desafio de projeto "Previsão de Estoque Inteligente na AWS com SageMaker Canvas. Neste Lab DIO, você aprenderá a usar o SageMaker Canvas para criar previsões de estoque baseadas em Machine Learning (ML). Siga os passos abaixo para completar o desafio!
+## DESCRIÇÃO: 
 
-## 📋 Pré-requisitos
+Aplicar conceitos práticos de Machine Learning (ML) utilizando o SageMaker Canvas para criar previsões de estoque. Objetivo: Desenvolver um modelo de previsão de estoque utilizando o SageMaker Canvas e documentar o processo em um repositório no GitHub. 
 
-Antes de começar, certifique-se de ter uma conta na AWS. Se precisar de ajuda para criar sua conta, confira nosso repositório [AWS Cloud Quickstart](https://github.com/digitalinnovationone/aws-cloud-quickstart).
+## CRIAÇÃO DO DATASET:
+
+Criei um novo dataset com a ajuda do Chat GPT, afim de ter resultados diferentes. Para construção do dataset utilizei como prompt: 
+
+*"Atue como um cientista de dados e crie um dataset em formato CSV com no mínimo 1000 registros. Gostaria que esse arquivo refletisse o histórico de esoque e vendas de produtos com as seguintes colunas: ID_PRODUTO (numerico incremental), DIA (iniciando em 31/12/2023), QUANTIDADE_ESTOQUE. QUANTIDADE_VENDAS_PRODUTO (colocando a quantidade de venda de determinado produdo) Nesse sentido, garanta que haja uma diversidade interessante de produtos (pelo menos 25 IDs diferentes) para um sistema de gerenciamento inteligente de estoque. Além disso, garanta que cada produto tenha uma quantidade inicial em estoque que vá decrescendo de maneira variável dia a dia (se tudo for vendido manter o estoque zerado). Na prática, usarei este dataset para treinar um modelo de machine learning."*
+
+### Resumo do dataset: 
+1000 linhas e 4 colunas
+Colunas separadas em ID_PRODUTO, DIA, QUANTIDADE_ESTOQUE e QUANTIDADE_VENDAS_PRODUTO.
+
+**ID_PRODUTO**: Tipo de dados: Quantitativo. Descrição: Identificador numérico para cada produto.
+**DIA**: Tipo de dados: Quantitativo. (Utilizada como marcação temporal) Descrição: Representa a data em que os dados de estoque e vendas foram registrados, começando em 31/12/2023.
+**QUANTIDADE_ESTOQUE**: Tipo de dados: Quantitativo. Descrição: Indicxa a quantidade de estoque disponível para o produto em uma data específica.
+**QUANTIDADE_VENDAS_PRODUTO**: Tipo de dados: Quantitativo. Descrição: Representa a quantifdade de venda de uma produto específico em uma data específica. 
 
 
-## 🎯 Objetivos Deste Desafio de Projeto (Lab)
+## CONSTRUINDO O MODELO
 
-![image](https://github.com/digitalinnovationone/lab-aws-sagemaker-canvas-estoque/assets/730492/72f5c21f-5562-491e-aa42-2885a3184650)
+Na criação do modelo através do Sage Maker Canvas, selecionei o tipo Análise preditiva - *Construa modelos usando conjuntos de dados tabulares para prever uma ou várias categorias, bem como problemas de regressão e previsão de séries temporais.*
 
-- Dê um fork neste projeto e reescreva este `README.md`. Sinta-se à vontade para detalhar todo o processo de criação do seu Modelo de ML para uma "Previsão de Estoque Inteligente".
-- Para isso, siga o [passo a passo] descrito a seguir e evolua as suas habilidades em ML no-code com o Amazon SageMaker Canvas.
-- Ao concluir, envie a URL do seu repositório com a solução na plataforma da DIO.
+**Selecionado a QUANTIDADE_ESTOQUE como coluna alvo para prever**. O modelo deve prever a quantidade de estoque usando os valores de dados passados para prever valores de dados futuros.
+
+Escolha de que preveja 2 dias no futuro. Usando calendario de feriados do Brasil para melhorar a previsão.
+Como sugestão, aceitei substituir todos os valores ausentes por ZERO em QUANTIDADE_ESTOQUE e substituir todos os valores ausentes por MEDIANA em QUANTIDADE_VENDAS_PRODUTO
 
 
-## 🚀 Passo a Passo
 
-### 1. Selecionar Dataset
 
--   Navegue até a pasta `datasets` deste repositório. Esta pasta contém os datasets que você poderá escolher para treinar e testar seu modelo de ML. Sinta-se à vontade para gerar/enriquecer seus próprios datasets, quanto mais você se engajar, mais relevante esse projeto será em seu portfólio.
--   Escolha o dataset que você usará para treinar seu modelo de previsão de estoque.
--   Faça o upload do dataset no SageMaker Canvas.
 
-### 2. Construir/Treinar
-
--   No SageMaker Canvas, importe o dataset que você selecionou.
--   Configure as variáveis de entrada e saída de acordo com os dados.
--   Inicie o treinamento do modelo. Isso pode levar algum tempo, dependendo do tamanho do dataset.
-
-### 3. Analisar
-
--   Após o treinamento, examine as métricas de performance do modelo.
--   Verifique as principais características que influenciam as previsões.
--   Faça ajustes no modelo se necessário e re-treine até obter um desempenho satisfatório.
-
-### 4. Prever
-
--   Use o modelo treinado para fazer previsões de estoque.
--   Exporte os resultados e analise as previsões geradas.
--   Documente suas conclusões e qualquer insight obtido a partir das previsões.
-
-## 🤔 Dúvidas?
-
-Esperamos que esta experiência tenha sido enriquecedora e que você tenha aprendido mais sobre Machine Learning aplicado a problemas reais. Se tiver alguma dúvida, não hesite em abrir uma issue neste repositório ou entrar em contato com a equipe da DIO.
